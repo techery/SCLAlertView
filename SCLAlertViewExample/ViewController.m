@@ -11,8 +11,6 @@
 
 @interface ViewController ()
 
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
-
 @end
 
 NSString *kSuccessTitle = @"Congratulations";
@@ -25,23 +23,6 @@ NSString *kButtonTitle = @"Done";
 NSString *kAttributeTitle = @"Attributed string operation successfully completed.";
 
 @implementation ViewController
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-
-    // auto size UIScrollView to fit the content
-    CGRect contentRect = CGRectZero;
-    for (UIView *view in self.scrollView.subviews) {
-        contentRect = CGRectUnion(contentRect, view.frame);
-    }
-    self.scrollView.contentSize = contentRect.size;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
 
 - (IBAction)showSuccess:(id)sender
 {
@@ -111,7 +92,6 @@ NSString *kAttributeTitle = @"Attributed string operation successfully completed
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     
     alert.backgroundType = SCLAlertViewBackgroundBlur;
-    alert.showAnimationType = SCLAlertViewShowAnimationFadeIn;
     [alert showNotice:self title:kNoticeTitle subTitle:@"You've just displayed this awesome Pop Up View with blur effect" closeButtonTitle:kButtonTitle duration:0.0f];
 }
 
@@ -127,7 +107,6 @@ NSString *kAttributeTitle = @"Attributed string operation successfully completed
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     
     alert.shouldDismissOnTapOutside = YES;
-    alert.showAnimationType = SCLAlertViewShowAnimationSimplyAppear;
     [alert alertIsDismissed:^{
         NSLog(@"SCLAlertView dismissed!");
     }];
@@ -140,7 +119,6 @@ NSString *kAttributeTitle = @"Attributed string operation successfully completed
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     
     SCLTextView *textField = [alert addTextField:@"Enter your name"];
-    alert.hideAnimationType = SCLAlertViewHideAnimationSimplyDisappear;
     [alert addButton:@"Show Name" actionBlock:^(void) {
         NSLog(@"Text value: %@", textField.text);
     }];
